@@ -1,0 +1,14 @@
+{
+  "name": "restomatic",
+  "version": "1.0.0",
+  "description": "Get a REST client up and running with no effort!",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Yair Tavor",
+  "license": "ISC",
+  "dependencies": {
+    "q": "^1.4.1"
+  }
+}
