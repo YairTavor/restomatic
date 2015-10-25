@@ -6,7 +6,7 @@
         pipeline = require('./lib/pipeline.js'),
         commandLineArgs = require('./lib/command-line-args.js'),
         logger = require('./lib/logger.js'),
-        db = new FileDb('./tempdb');
+        db = new FileDb('./temporary-db');
 
     function Restomatic(){
         var self = this;
@@ -55,20 +55,17 @@
          */
         this.start = function(){
             db.init().then(function(connection){
-                db.query({
-                    entity : 'users'
-                });
-
                 logger.isDebugMode = !!commandLineArgs.get().debug;
-
                 http.createServer(function (req, res) {
+                    // TODO: skip query for cross domain pre-flight requests with OPTIONS header. should just return 200 OK.
+                    // TODO: check for static file handling before going into the pipeline
                     pipeline.start(db, req, res);
                 }).listen(self.port, self.ip);
-                console.log('restomatic server running at http://'+ self.ip + ':'+ self.port +'/');
+                logger.log('restomatic server running at http://'+ self.ip + ':'+ self.port +'/');
             }, function(err){
-                console.log(err);
+                logger.log(err);
             });
-        }
+        };
     }
 
     module.exports = {

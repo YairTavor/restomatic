@@ -8,6 +8,7 @@
         it('query object has all default properties set', function () {
             var queryObject = new QueryObject();
 
+            assert.equal(queryObject.action, QueryObject.ACTION_GET);
             assert.equal(queryObject.entity, null);
             assert.equal(queryObject.id, null);
             assert.equal(queryObject.from, 0);
@@ -18,6 +19,7 @@
 
         it('object can be initialized in the constructor', function () {
             var queryObject = new QueryObject({
+                action: QueryObject.ACTION_CREATE,
                 entity: 'a',
                 id: 'b',
                 from: 1,
@@ -26,6 +28,7 @@
                 ascending: true
             });
 
+            assert.equal(queryObject.action, QueryObject.ACTION_CREATE);
             assert.equal(queryObject.entity, 'a');
             assert.equal(queryObject.id, 'b');
             assert.equal(queryObject.from, 1);
@@ -58,12 +61,24 @@
                 assert.equal(queryObject[propertyName], fallbackValue);
             }
 
+            function assertMandatoryProperty(propertyName, validValue, invalidValue) {
+                assert.doesNotThrow(function () {
+                    queryObject[propertyName] = validValue;
+                });
+
+                assert.throws(function () {
+                    queryObject[propertyName] = invalidValue;
+                });
+            }
+
+            assertMandatoryProperty('action', 'get', 'unknownAction');
             assertProperty('entity', 'aaa', 2, '', null);
             assertProperty('id', 'aaa', 2, '', null);
             assertProperty('count', 2, 'aaa', 0, null);
             assertProperty('sort', 'aaa', 2, '', null);
             assertProperty('ascending', true, 2, false, true);
+            assertMandatoryProperty('from', 2, 'aaa');
         });
-    })
+    });
 
 }());

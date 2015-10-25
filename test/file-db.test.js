@@ -55,7 +55,7 @@
         });
 
         afterEach(function(){
-            // unmock fs
+            // un-mock fs
             fs.readFile  = original.read;
             fs.writeFile = original.write;
             fs.exists    = original.exists;
@@ -95,7 +95,7 @@
         it('Save data to db', function(){
             var fileDb = new FileDb('baseFolder');
 
-            return fileDb.persistDb('persons', [{name:'Albert'}]).then(function(result){
+            return fileDb.persistDb('persons', [{name:'Albert'}]).then(function(){
                 assert.equal(lastMethod, 'write');
                 assert.equal(lastPath, 'baseFolder/persons.db');
             });

@@ -4,6 +4,7 @@
     var assert = require('assert'),
         logger = require('../lib/logger.js');
 
+    /*eslint-disable no-console */
     describe('logger', function () {
 
         it('inherit console and extend it', function () {
@@ -16,7 +17,7 @@
             var logHasBeenCalled = false,
                 original = console.log;
 
-            function log(message) {
+            function log() {
                 logHasBeenCalled = true;
             }
 
@@ -43,7 +44,8 @@
                 logger.isDebugMode = false;
                 logger.debug('test');
                 assert.equal(logHasBeenCalled, false);
-            })
+            });
         });
     });
+    /*eslint-enable no-console */
 }());

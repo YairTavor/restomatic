@@ -16,7 +16,7 @@
         });
 
         it('get simple command line arguments', function () {
-            var result = null;
+            var result;
 
             process.argv.push('firstArg');
             process.argv.push('secondArg');
@@ -29,7 +29,7 @@
         });
 
         it('get key/value command line arguments', function () {
-            var result = null;
+            var result;
 
             process.argv.push('firstArg=5');
             process.argv.push('secondArg=true');
@@ -38,16 +38,16 @@
 
             result = commandLineArgs.get();
             assert.deepEqual(result, {
-                firstArg : "5",
+                firstArg : '5',
                 secondArg : true,
                 thirdArg : false,
-                forthArg : "test"
+                forthArg : 'test'
             });
         });
 
         it('works when no command line arguments exists', function () {
             var result = commandLineArgs.get();
             assert.deepEqual(result, {});
-        })
+        });
     });
 }());

@@ -12,7 +12,7 @@
 
         it('has query function', function(){
             assert(dbAdapter.query);
-            assert.throws(function(){dbAdapter.query()});
+            assert.throws(function(){dbAdapter.query(null); });
         });
     });
 }());

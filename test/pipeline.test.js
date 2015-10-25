@@ -75,7 +75,7 @@
                 return deferred.promise;
             }
 
-            pipeline.getRequestSourceIP = function mockIp(){ return '' };
+            pipeline.getRequestSourceIP = function mockIp(){ return ''; };
             pipeline.headerParse = function mockHeaderParser(){
                 assert.equal(assertions.headerParserWasCalled, false);
                 assert.equal(assertions.bodyParserWasCalled, false);
