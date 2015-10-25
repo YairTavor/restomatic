@@ -1,12 +1,11 @@
-Note
-=============================
-This is a work in progress and is not yet ready to be used.
-I will remove this comment once the project is stable enough.
+> Note
+> ====
+> This is a work in progress and is not yet ready to be used.
+> I will remove this comment once the project is stable enough.
 
 
 Restomatic
-=============================
-
+=========
 ## What is it about?
 *Restomatic* is an ad-hock REST server. This means you can "make up" your api as you go.
 When you create new entities using simple REST requests, *Restomatic* will automagically
@@ -26,7 +25,7 @@ flow easily or inject your own url handler to serve custom data.
 
 ## How To Use
 
-##### Simple case:
+##### Jumpstart
 
 Running this code inside your node app will run Restomatic server.
 
@@ -41,3 +40,23 @@ Running this code inside your node app will run Restomatic server.
 ```
 You can now access it by calling http://127.0.0.1:1337
 
+##### Consuming data
+
+//TODO: document the default Restomatic API
+
+> Placeholder: word about the default FileDB
+
+## Configuration
+
+//TODO: document all the possible configurations
+
+## Customization
+
+//TODO: how to customize the different parts of Restomatic
+##### Custom handlers
+
+##### Database Adapter
+
+##### Type convertors
+
+##### Pipeline
