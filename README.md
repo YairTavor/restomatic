@@ -23,6 +23,9 @@ Using *Restomatic* is a good place to start planing your API without writing too
 or wiring all thous annoying routs. You can later add hooks to the pipeline to customize the data
 flow easily or inject your own url handler to serve custom data.
 
+#### Good for QA
+Instead of using live server, you can use *Restomatic* in your tests to mock a REST server.
+
 ## How To Use
 
 ##### Jumpstart

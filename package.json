@@ -1,14 +1,30 @@
 {
   "name": "restomatic",
   "version": "1.0.0",
-  "description": "Get a REST client up and running with no effort!",
-  "main": "server.js",
+  "description": "Automatic REST server",
+  "main": "restomatic.js",
+  "directories": {
+    "test": "__tests__"
+  },
   "scripts": {
-    "test": "test"
+    "test": "jest",
+    "test-debug": "node-debug --nodejs --harmony ./node_modules/jest-cli/bin/jest.js --runInBand",
+    "start": "node server.js"
+  },
+  "jest": {
+    "testRunner": "./node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YairTavor/restomatic.git"
   },
   "author": "Yair Tavor",
-  "license": "ISC",
-  "dependencies": {
-    "q": "^1.4.1"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YairTavor/restomatic/issues"
+  },
+  "homepage": "https://github.com/YairTavor/restomatic#readme",
+  "devDependencies": {
+    "jest-cli": "^0.8.0"
   }
 }
