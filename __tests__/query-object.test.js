@@ -10,7 +10,6 @@ describe('query object', () => {
 
         expect(queryObject.action).toBe(QueryObject.ACTION_GET);
         expect(queryObject.entity).toBeNull();
-        expect(queryObject.id).toBeNull();
         expect(queryObject.from).toBe(0);
         expect(queryObject.count).toBeNull();
         expect(queryObject.sort).toBeNull();
@@ -20,8 +19,7 @@ describe('query object', () => {
     it('can be initialized in the constructor', () => {
         const queryObject = new QueryObject({
             action: QueryObject.ACTION_CREATE,
-            entity: 'a',
-            id: 'b',
+            entity: { id: 1 },
             from: 1,
             count: 100,
             sort: 'name',
@@ -29,8 +27,7 @@ describe('query object', () => {
         });
 
         expect(queryObject.action).toBe(QueryObject.ACTION_CREATE);
-        expect(queryObject.entity).toBe('a');
-        expect(queryObject.id).toBe('b');
+        expect(queryObject.entity).toEqual({ id: 1 });
         expect(queryObject.from).toBe(1);
         expect(queryObject.count).toBe(100);
         expect(queryObject.sort).toBe('name');
@@ -59,8 +56,7 @@ describe('query object', () => {
         }
 
         assertMandatoryProperty('action', 'get', 'unknownAction');
-        assertProperty('entity', 'aaa', 2, '', null);
-        assertProperty('id', 'aaa', 2, '', null);
+        assertMandatoryProperty('entity', {}, 2);
         assertProperty('count', 2, 'aaa', 0, null);
         assertProperty('sort', 'aaa', 2, '', null);
         assertProperty('ascending', true, 2, false, true);

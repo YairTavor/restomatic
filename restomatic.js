@@ -18,7 +18,7 @@ class Restomatic {
          * @type {string}
          * @default '127.0.0.1'
          */
-        this.ip = commandLineArgs['/i'] || '127.0.0.1';
+        this.ip = commandLineArgs['-i'] || '127.0.0.1';
 
         /**
          * The port number of your server
@@ -27,7 +27,7 @@ class Restomatic {
          * @type {number}
          * @default 1337
          */
-        this.port = commandLineArgs['/p'] || 1337;
+        this.port = commandLineArgs['-p'] || 1337;
 
         /**
          * This is an instance of the restomatic DbAdapter. By default, this uses a file db.
@@ -63,12 +63,12 @@ class Restomatic {
      * @method start
      */
     start() {
-        if(commandLineArgs['/h'] || commandLineArgs['/help']){
+        if(commandLineArgs['-h'] || commandLineArgs['-help']){
             this.help();
         }
         else {
             db.init().then((connection) => {
-                logger.isDebugMode = !!commandLineArgs['/d'];
+                logger.isDebugMode = !!commandLineArgs['-d'];
 
                 http.createServer((req, res) => {
                     // TODO: skip query for cross domain pre-flight requests with OPTIONS header. should just return 200 OK.
@@ -108,10 +108,10 @@ class Restomatic {
         logger.log(' ');
         logger.log('Here are the possible command arguments for Restomatic:');
         logger.log(' ');
-        logger.log('    /p=1337 [set port number]');
-        logger.log('    /i=127.0.0.1 [set ip or host number]');
-        logger.log('    /d [debug mode - make Restomatic more chatty]');
-        logger.log('    /h or /help [this help]');
+        logger.log('    -p=1337       set port number');
+        logger.log('    -i=127.0.0.1  set ip address');
+        logger.log('    -d            debug mode - make Restomatic more chatty');
+        logger.log('    -h or -help   this help');
         logger.log(' ');
         logger.log('For more information, go to https://github.com/yairtavor/restomatic');
     }
