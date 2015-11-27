@@ -36,13 +36,12 @@ describe('parsers', () => {
                 }
             };
 
-        expect(() => { parsers.validateParser(missingName)}).toThrow();
-        expect(() => { parsers.validateParser(missingMime)}).toThrow();
-        expect(() => { parsers.validateParser(invalidMime)}).toThrow();
-        expect(() => { parsers.validateParser(missingSerialize)}).toThrow();
-        expect(() => { parsers.validateParser(missingDeserialize)}).toThrow();
+        expect(() => { parsers.validateParser(missingName); }).toThrow();
+        expect(() => { parsers.validateParser(missingMime); }).toThrow();
+        expect(() => { parsers.validateParser(invalidMime); }).toThrow();
+        expect(() => { parsers.validateParser(missingSerialize); }).toThrow();
+        expect(() => { parsers.validateParser(missingDeserialize); }).toThrow();
         expect(parsers.validateParser(validParser)).toBe(true);
-
     });
 
     it('can register a new parser', () => {

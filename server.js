@@ -1,7 +1,5 @@
-(function(){
-    'use strict';
+'use strict';
 
-    var restomatic = require('./restomatic.js');
+const restomatic = require('./restomatic.js');
 
-    restomatic.server.start();
-}());
+restomatic.server.start();

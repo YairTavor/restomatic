@@ -42,7 +42,6 @@ describe('pipeline', () => {
             expect(args.names).toEqual(['header', 'body', 'url', 'request', 'response']);
             done();
         });
-
     });
 
     it('can add steps to the pipeline', (done) => {
@@ -51,7 +50,6 @@ describe('pipeline', () => {
         pipeline.insertLast('postprocessor', mockPipelineAction('postprocessor').process);
 
         pipeline.start(null, fakeRequest, fakeResponse).then((args) => {
-
             expect(args.names).toEqual(['preprocessor', 'header', 'extraHP',
                 'body', 'url', 'request', 'response', 'postprocessor']);
             done();

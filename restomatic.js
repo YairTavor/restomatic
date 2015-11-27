@@ -63,7 +63,7 @@ class Restomatic {
      * @method start
      */
     start() {
-        if(commandLineArgs['-h'] || commandLineArgs['-help']){
+        if (commandLineArgs['-h'] || commandLineArgs['-help']) {
             this.help();
         }
         else {
@@ -87,20 +87,20 @@ class Restomatic {
 
     // todo: implement command line testing
     consoleTesting() {
-        process.stdin.resume();
-        process.stdin.setEncoding('utf8');
-
-        process.stdin.on('data', function (text) {
-            console.log(text);
-            if (text.trim() === 'quit') {
-                done();
-            }
-        });
-
         function done() {
             console.log('Now that process.stdin is paused, there is nothing more to do.');
             process.exit();
         }
+
+        process.stdin.resume();
+        process.stdin.setEncoding('utf8');
+
+        process.stdin.on('data', function handleInput(text) {
+            logger.log(text);
+            if (text.trim() === 'quit') {
+                done();
+            }
+        });
     }
 
     help() {

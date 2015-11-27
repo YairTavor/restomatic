@@ -64,7 +64,7 @@ describe('PluggableQueue', () => {
         expect(pluggableQueue.getValues()[1]).toBe('valueSecond');
     });
 
-    it('can insert a new entry at the begining of the queue', () => {
+    it('can insert a new entry at the beginning of the queue', () => {
         pluggableQueue.insert(0, 'keyFirst', 'valueFirst');
         pluggableQueue.insertFirst('keySecond', 'valueSecond');
 
@@ -107,7 +107,7 @@ describe('PluggableQueue', () => {
         }).toThrow();
     });
 
-    it('can remove entry at a specifik key', () => {
+    it('can remove entry at a specific key', () => {
         pluggableQueue.insertFirst('keyFirst', 'valueFirst');
         expect(pluggableQueue.length).toBe(1);
 
