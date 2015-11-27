@@ -88,7 +88,7 @@ restomatic.server.parsers.register({
     // parser name
     name: 'csv',
 
-    // all thie mime types this parser should handle
+    // all the mime types this parser should handle
     mime: ['text/csv', 'application/excel'],
 
     // return the given object in csv string format

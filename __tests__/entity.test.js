@@ -43,7 +43,7 @@ describe('entity', () => {
     it('validates the entity properly', () => {
         const entity = new Entity();
 
-        //---- invalid cases ---//
+        // ---- invalid cases --- //
         entity.name = '';
         expect(() => { entity.validate(); }).toThrow();
 
@@ -65,7 +65,7 @@ describe('entity', () => {
         entity.child = new Entity();
         expect(() => { entity.validate(); }).toThrow();
 
-        //---- valid cases -----//
+        // ---- valid cases ----- //
 
         entity.name = 'orders';
         entity.id = null;
@@ -87,6 +87,5 @@ describe('entity', () => {
         entity.body = [];
         entity.child = null;
         expect(() => { entity.validate(); }).not.toThrow();
-
     });
 });

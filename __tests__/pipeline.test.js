@@ -40,7 +40,6 @@ describe('pipeline', () => {
             expect(args.names).toEqual(['url', 'request', 'response']);
             done();
         });
-
     });
 
     it('can add steps to the pipeline', (done) => {
