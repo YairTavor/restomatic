@@ -30,8 +30,6 @@ describe('pipeline', () => {
         };
         fakeRequest.headers['X-Forwarded-For'] = 'fake';
 
-        pipeline.set(pipeline.steps.HEADER_PARSER, mockPipelineAction('header').process);
-        pipeline.set(pipeline.steps.BODY_PARSER, mockPipelineAction('body').process);
         pipeline.set(pipeline.steps.URL_FILTER, mockPipelineAction('url').process);
         pipeline.set(pipeline.steps.REQUEST_HANDLER, mockPipelineAction('request').process);
         pipeline.set(pipeline.steps.RESPONSE_HANDLER, mockPipelineAction('response').process);
@@ -39,7 +37,7 @@ describe('pipeline', () => {
 
     it('process queue of functions by order', (done) => {
         pipeline.start(null, fakeRequest, fakeResponse).then((args) => {
-            expect(args.names).toEqual(['header', 'body', 'url', 'request', 'response']);
+            expect(args.names).toEqual(['url', 'request', 'response']);
             done();
         });
 
@@ -47,13 +45,12 @@ describe('pipeline', () => {
 
     it('can add steps to the pipeline', (done) => {
         pipeline.insertFirst('preprocessor', mockPipelineAction('preprocessor').process);
-        pipeline.insertAfter(pipeline.steps.HEADER_PARSER, 'extraHP', mockPipelineAction('extraHP').process);
+        pipeline.insertAfter(pipeline.steps.REQUEST_HANDLER, 'extraHP', mockPipelineAction('extraHP').process);
         pipeline.insertLast('postprocessor', mockPipelineAction('postprocessor').process);
 
         pipeline.start(null, fakeRequest, fakeResponse).then((args) => {
 
-            expect(args.names).toEqual(['preprocessor', 'header', 'extraHP',
-                'body', 'url', 'request', 'response', 'postprocessor']);
+            expect(args.names).toEqual(['preprocessor', 'url', 'request', 'extraHP', 'response', 'postprocessor']);
             done();
         });
     });
