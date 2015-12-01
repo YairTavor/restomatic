@@ -85,8 +85,8 @@ pass in your new parser:
 
 ```javascript
 restomatic.server.parsers.register({
-    // parser name
-    name: 'csv',
+    // extension that the parser should handle
+    ext: 'csv',
 
     // all the mime types this parser should handle
     mime: ['text/csv', 'application/excel'],
