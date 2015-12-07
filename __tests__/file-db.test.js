@@ -38,19 +38,14 @@ describe('file-db', () => {
         const fileDb = new FileDb('baseFolder');
         let result;
 
-        result = fileDb.getPath('persons');
-        expect(result).toBe('baseFolder/persons.db');
-
-        // works when unnecessary slashes are added
-        fileDb.dbFolder = 'baseFolder/';
-        result = fileDb.getPath('/persons');
+        result = fileDb.getPath({ name: 'persons' });
         expect(result).toBe('baseFolder/persons.db');
     });
 
     it('Save data to db', (done) => {
         const fileDb = new FileDb('baseFolder');
 
-        fileDb.persistDb('persons', [{name: 'Albert'}]).then(() => {
+        fileDb.persistDb({ name: 'persons' }, [{name: 'Albert'}]).then(() => {
             // should create 'baseFolder/persons.db'
             expect(fs.writeFile).toBeCalled();
             done();
@@ -60,7 +55,7 @@ describe('file-db', () => {
     it('Read data from db when db does not exists', (done) => {
         const fileDb = new FileDb('baseFolder');
 
-        fileDb.getDb('persons').then((results) => {
+        fileDb.getDb({ name: 'persons' }).then((results) => {
             done();
 
             // create the db

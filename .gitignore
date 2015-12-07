@@ -2,7 +2,7 @@
 
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
-
+.DS_Store
 *.iml
 
 ## Directory-based project format:
