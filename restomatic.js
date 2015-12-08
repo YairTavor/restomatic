@@ -85,7 +85,7 @@ class Restomatic {
         }
     }
 
-    // todo: implement command line testing
+    // TODO: implement command line testing
     consoleTesting() {
         function done() {
             console.log('Now that process.stdin is paused, there is nothing more to do.');

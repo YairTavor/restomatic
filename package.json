@@ -26,5 +26,8 @@
   "homepage": "https://github.com/YairTavor/restomatic#readme",
   "devDependencies": {
     "jest-cli": "^0.8.0"
+  },
+  "dependencies": {
+    "q": "^1.4.1"
   }
 }
