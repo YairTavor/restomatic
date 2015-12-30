@@ -1,13 +1,12 @@
 'use strict';
 const http = require('http'),
-    FileDb = require('./lib/file-db.js'),
-    DbAdapter = require('./lib/db-adapter.js'),
-    Pipeline = require('./lib/pipeline.js'),
+    Pipeline = require('./lib/pipeline'),
     parsers = require('./lib/parsers'),
     jsonParser = require('./lib/parsers/json-parser'),
-    commandLineArgs = require('./lib/command-line-args.js').get(),
-    logger = require('./lib/logger.js'),
-    db = new FileDb('./temporary-db');
+    commandLineArgs = require('./lib/command-line-args').get(),
+    logger = require('./lib/logger'),
+    bodyReader = require('./lib/body-reader'),
+    db = null;
 
 class Restomatic {
     constructor() {
@@ -66,22 +65,31 @@ class Restomatic {
         if (commandLineArgs['-h'] || commandLineArgs['-help']) {
             this.help();
         }
+        else if ( this.db === null ){
+            throw new Error('No db adapter was initialized. Please set restomatic.server.db before calling ' +
+                'the start() function');
+        }
         else {
-            db.init().then((connection) => {
-                logger.isDebugMode = !!commandLineArgs['-d'];
+            logger.isDebugMode = !!commandLineArgs['-d'];
 
-                http.createServer((req, res) => {
-                    // TODO: skip query for cross domain pre-flight requests with OPTIONS header. should just return 200 OK.
-                    // TODO: check for static file handling before going into the pipeline
-                    this.pipeline.start(db, req, res);
-                }).listen(this.port, this.ip);
+            http.createServer((req, res) => {
+                // TODO: skip query for cross domain pre-flight requests with OPTIONS header. should just return 200 OK.
+                // TODO: check for static file handling before going into the pipeline
+                if(bodyReader.shouldCheckBody(req)){
+                    bodyReader.getBody(req, res).then((body) => {
+                        req.body = body;
+                        this.pipeline.start(this.db, req, res);
+                    });
+                }
+                else {
+                    req.body = null;
+                    this.pipeline.start(this.db, req, res);
+                }
+            }).listen(this.port, this.ip);
 
-                // this.consoleTesting();
+            // this.consoleTesting();
 
-                logger.log('restomatic server running at http://' + this.ip + ':' + this.port + '/');
-            }, (err) => {
-                logger.log(err);
-            });
+            logger.log('restomatic server running at http://' + this.ip + ':' + this.port + '/');
         }
     }
 
@@ -118,7 +126,5 @@ class Restomatic {
 }
 
 module.exports = {
-    FileDb: FileDb,
-    DbAdapter: DbAdapter,
     server: new Restomatic()
 };
