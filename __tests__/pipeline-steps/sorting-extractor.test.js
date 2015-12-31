@@ -64,10 +64,19 @@ describe('sorting extractor', () => {
     });
 
     it('extract sorting object', () => {
-        const result = sortingExtractor.extract(mockRequest);
+        let result;
+
+        result = sortingExtractor.extract(mockRequest);
         expect(result).toEqual({
             ascending: true,
             sort: 'name'
+        });
+
+        mockRequest.url = '/some/url?sort=-age';
+        result = sortingExtractor.extract(mockRequest);
+        expect(result).toEqual({
+            ascending: false,
+            sort: 'age'
         });
     });
 });
